@@ -2,7 +2,7 @@ const API_URL = 'https://darts-api.onrender.com/get-betmgm-premier-league-nights
 
 // Fetch the events data from your Flask API
 async function fetchPremierLeagueNights() {
-    const response = await fetch(`${API_URL}/get-betmgm-premier-league-nights`);
+    const response = await fetch(API_URL);  // No need to add the endpoint again
     if (response.ok) {
         const events = await response.json();
         populateDropdown(events);
@@ -24,7 +24,7 @@ function populateDropdown(events) {
 
 // Display event details when a Premier League Night is selected
 async function displayEventDetails(eventId) {
-    const response = await fetch(`${API_URL}/get-events`);
+    const response = await fetch(`${API_URL}/get-events`);  // Ensure this is correct based on your Flask API structure
     if (response.ok) {
         const events = await response.json();
         const event = events.find(e => e.idEvent == eventId);
