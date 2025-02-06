@@ -24,7 +24,7 @@ function populateDropdown(events) {
 
 // Display event details when a Premier League Night is selected
 async function displayEventDetails(eventId) {
-    const response = await fetch(`${API_URL}`);  // No need for /get-betmgm-premier-league-nights here
+    const response = await fetch(API_URL);  // Fetch the list of events again for the details
     if (response.ok) {
         const events = await response.json();
         const event = events.find(e => e.idEvent == eventId);
@@ -34,10 +34,17 @@ async function displayEventDetails(eventId) {
                 <h2>${event.strEvent}</h2>
                 <p><strong>Date:</strong> ${event.dateEvent}</p>
                 <p><strong>Time:</strong> ${event.strTime || 'No time available'}</p>
-                <p><strong>Location:</strong> ${event.strVenue || 'No venue information'}</p>
+                <p><strong>Venue:</strong> ${event.strVenue || 'No venue information'}</p>
                 <p><strong>City:</strong> ${event.strCity || 'No city information'}</p>
                 <p><strong>Country:</strong> ${event.strCountry || 'No country information'}</p>
                 <p><strong>Description:</strong> ${event.strDescriptionEN || 'No description available'}</p>
+                <p><strong>Results:</strong> ${event.strResult || 'No results available yet'}</p>
+                <div>
+                    <strong>Posters:</strong><br>
+                    <img src="${event.strPoster || 'https://via.placeholder.com/150'}" alt="Event Poster" style="width: 200px;"><br>
+                    <strong>Thumb:</strong><br>
+                    <img src="${event.strThumb || 'https://via.placeholder.com/150'}" alt="Event Thumbnail" style="width: 150px;">
+                </div>
             `;
             document.getElementById('eventDetails').innerHTML = details;
         } else {
