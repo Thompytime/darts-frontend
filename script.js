@@ -1,4 +1,4 @@
-const API_URL = 'https://darts-api.onrender.com/get-betmgm-premier-league-nights';  // Replace with your actual backend URL
+const API_URL = 'https://darts-api.onrender.com/get-betmgm-premier-league-nights';  // Correct backend URL
 
 // Fetch the events data from your Flask API
 async function fetchPremierLeagueNights() {
@@ -24,7 +24,7 @@ function populateDropdown(events) {
 
 // Display event details when a Premier League Night is selected
 async function displayEventDetails(eventId) {
-    const response = await fetch(`${API_URL}/get-events`);  // Ensure this is correct based on your Flask API structure
+    const response = await fetch(`${API_URL}`);  // No need for /get-betmgm-premier-league-nights here
     if (response.ok) {
         const events = await response.json();
         const event = events.find(e => e.idEvent == eventId);
@@ -43,6 +43,8 @@ async function displayEventDetails(eventId) {
         } else {
             document.getElementById('eventDetails').innerHTML = "<p>No details available for this night.</p>";
         }
+    } else {
+        console.error("Failed to fetch event details");
     }
 }
 
